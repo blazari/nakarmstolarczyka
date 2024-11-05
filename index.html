@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nakarm Stolarczyka</title>
+    <style>
+        body{
+            background-color: gray;
+            text-align: center;
+            font-family: sans-serif;
+        }
+        #twarz{
+            width: 150px;
+            height: 150px;
+            transition: transform 0.3s ease;
+        }
+        .powieksz{
+            transform: scale(1.5);
+        }
+        main{
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
+        button{
+            margin: 10px;
+            padding: 5px;
+            background-color: transparent;
+            border: 2px dotted black;
+            border-radius: 10px;
+            transition: 0.5s;
+        }
+        button:hover{
+            background-color: black;
+            color: white;
+            border: 2px dotted white;
+        }
+        #pocwicz{
+            font-size: 50px;
+            background-color: red;
+            border: 5px orange dashed;
+        }
+    </style>
+</head>
+<body>
+    <h1>NAKARM STOLARCZYKA</h1><img  id="twarz" src="twarz.png">
+    <h2>Wybierz co ma zjeść</h2>
+    <main>
+        <div id="racuchy">
+            <h3>Racuchy</h3>
+            <img src="racuchy.png" width="200" height="200"><br>
+            <button onclick="powiekszObrazek()">NAKARM RACUCHAMI!</button>
+        </div>  
+        <div id="pierogi">
+            <h3>Pierogi</h3>
+            <img src="pierogi.png" width="200" height="200"><br>
+            <button onclick="powiekszObrazek()">NAKARM PIEROGAMI!</button>
+        </div>
+        <div id="gruszki">
+            <h3>Gruszki</h3>
+            <img src="gruszki.png" width="200" height="200"><br>
+            <button onclick="zmniejszObrazek()">NAKARM GRUSZKAMI!</button>
+        </div>
+    </main>
+    <button id="pocwicz" onclick="pocwicz()">POĆWICZ!</button>
+    <script>
+        let currentScale = 1; 
+        const maxScale = 3;   
+        const minScale = 0.5;
+        function powiekszObrazek(){
+            var image = document.getElementById("twarz");
+            if (currentScale < maxScale) { 
+                currentScale += 0.1; 
+                image.style.transform = `scale(${currentScale})`;
+            }
+            if(currentScale >= maxScale){
+                alert("Stolarczyk jest za gruby i wybuchł!");
+                currentScale == 1;
+            }
+        }
+        function zmniejszObrazek() {
+            var image = document.getElementById("twarz");
+            if (currentScale > minScale) { 
+                currentScale -= 0.1; 
+                image.style.transform = `scale(${currentScale})`;
+            }
+            if(currentScale <= minScale){
+                alert("Stolarczyk jest za chudy i umarł!");
+            }
+        }
+        let width = 2500;
+        let height = 2500;
+        const imgLink = "wybuch.png";
+        function pocwicz(){
+            for(i=1; i<=1000; i++){
+                let noweOkno = window.open('','',`width=${width},height=${height}`);
+                noweOkno.document.body.style.backgroundColor = "red";
+                let zdjecie = noweOkno.document.createElement("img");
+                zdjecie.src = imgLink;
+                zdjecie.style.width = "100%";
+                zdjecie.style.height = "100%";
+                noweOkno.document.body.appendChild(zdjecie);
+                width *= 0.99;
+                height *= 0.99;
+            }
+        }
+            
+    </script>
+</body>
+</html>
